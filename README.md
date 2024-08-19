@@ -248,7 +248,7 @@ The API exposes several endpoints for managing content:
 
 ### API - Summary
 
-The API is structured around specific resource paths (/articles, /about, /contact), and the requests should be directed to these endpoints with appropriate HTTP methods (GET, POST, PUT, DELETE). The previous generic content endpoint is no longer relevant.
+The API is structured around specific resource paths (/articles, /about, /contact), and the requests should be directed to these endpoints with appropriate HTTP methods (GET, POST, PUT, DELETE).
 
 ## Contributing
 
