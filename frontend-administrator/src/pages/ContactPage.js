@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Spin, notification, Modal } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { fetchContactContent, saveContactContent } from '../network';
 
 function ContactPage() {
   const [content, setContent] = useState("");
@@ -8,20 +9,28 @@ function ContactPage() {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
-    // Fetch contact content from API (mocked)
-    setTimeout(() => {
-      setContent("This is the Contact page content that has been saved.");
-      setLoading(false);
-    }, 1000);
+    const loadContent = async () => {
+      try {
+        const data = await fetchContactContent();
+        setContent(data);
+      } catch (error) {
+        notification.error({ message: 'Failed to load content' });
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadContent();
   }, []);
 
-  const handleSave = (values) => {
-    setContent(values.content);
-    setIsModalVisible(false);
-    notification.success({
-      message: 'Content Saved',
-      description: 'The content was successfully saved.',
-    });
+  const handleSave = async (values) => {
+    try {
+      await saveContactContent(values.content);
+      setContent(values.content);
+      setIsModalVisible(false);
+      notification.success({ message: 'Content Saved', description: 'The content was successfully saved.' });
+    } catch (error) {
+      notification.error({ message: 'Failed to save content' });
+    }
   };
 
   const handleEdit = () => {
@@ -33,10 +42,7 @@ function ContactPage() {
       title: 'Are you sure you want to delete this content?',
       onOk: () => {
         setContent("");
-        notification.success({
-          message: 'Content Deleted',
-          description: 'The content was successfully deleted.',
-        });
+        notification.success({ message: 'Content Deleted', description: 'The content was successfully deleted.' });
       },
     });
   };
@@ -49,11 +55,11 @@ function ContactPage() {
     <div className="page-container">
       {content ? (
         <>
-          <div style={{ marginBottom: '20px' }}>
+          <div className="content-section">
             <h2>Contact Us</h2>
             <p>{content}</p>
           </div>
-          <div>
+          <div className="button-group">
             <Button type="primary" icon={<EditOutlined />} onClick={handleEdit}>
               Edit
             </Button>
@@ -63,7 +69,7 @@ function ContactPage() {
           </div>
         </>
       ) : (
-        <div>
+        <div className="content-section">
           <p>No content available. Click "Add Content" to create new content.</p>
           <Button type="primary" icon={<EditOutlined />} onClick={handleEdit}>
             Add Content

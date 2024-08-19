@@ -1,6 +1,9 @@
 // network.js
 
-// Mock data for Articles
+// Mock data
+let mockAboutContent = "This is the About page content that has been saved.";
+let mockContactContent = "This is the Contact page content that has been saved.";
+
 let mockArticles = [
   {
     id: "1",
@@ -59,9 +62,33 @@ let mockArticles = [
   },
 ];
 
-// Mock data for About and Contact
-let mockAboutContent = "Welcome to our platform! We are dedicated to providing high-quality, verified news and insightful articles on a variety of topics. Our mission is to keep you informed and engaged with content that matters.";
-let mockContactContent = "We'd love to hear from you! For inquiries, feedback, or support, please reach out to us via email at support@medium.com or fill out the contact form below. We’re here to help!";
+const API_URL = process.env.REACT_APP_API_URL;
+
+// Fetch About Content
+export const fetchAboutContent = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 500)); // Simulate network delay
+  return mockAboutContent;
+};
+
+// Fetch Contact Content
+export const fetchContactContent = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 500)); // Simulate network delay
+  return mockContactContent;
+};
+
+// Save About Content
+export const saveAboutContent = async (content) => {
+  await new Promise((resolve) => setTimeout(resolve, 500)); // Simulate network delay
+  mockAboutContent = content;
+  return mockAboutContent;
+};
+
+// Save Contact Content
+export const saveContactContent = async (content) => {
+  await new Promise((resolve) => setTimeout(resolve, 500)); // Simulate network delay
+  mockContactContent = content;
+  return mockContactContent;
+};
 
 // Fetch Articles
 export const fetchArticles = async () => {
@@ -75,14 +102,22 @@ export const fetchArticleById = async (id) => {
   return mockArticles.find((article) => article.id === id);
 };
 
-// Fetch About Content
-export const fetchAboutContent = async () => {
+// Create or Update Article
+export const saveArticle = async (article) => {
   await new Promise((resolve) => setTimeout(resolve, 500)); // Simulate network delay
-  return mockAboutContent;
+  if (article.id) {
+    const index = mockArticles.findIndex((a) => a.id === article.id);
+    mockArticles[index] = article;
+  } else {
+    article.id = String(mockArticles.length + 1);
+    mockArticles.push(article);
+  }
+  return article;
 };
 
-// Fetch Contact Content
-export const fetchContactContent = async () => {
+// Delete Article
+export const deleteArticle = async (id) => {
   await new Promise((resolve) => setTimeout(resolve, 500)); // Simulate network delay
-  return mockContactContent;
+  mockArticles = mockArticles.filter((article) => article.id !== id);
+  return id;
 };
