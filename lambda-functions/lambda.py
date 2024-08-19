@@ -10,19 +10,28 @@ def lambda_handler(event, context):
     method = event['httpMethod']
     
     if method == 'GET':
-        # Fetch content by id
-        content_id = event['queryStringParameters']['id']
-        response = table.get_item(Key={'id': content_id})
-        if 'Item' in response:
+        if event['queryStringParameters'] and 'id' in event['queryStringParameters']:
+            # Fetch content by id
+            content_id = event['queryStringParameters']['id']
+            response = table.get_item(Key={'id': content_id})
+            if 'Item' in response:
+                return {
+                    'statusCode': 200,
+                    'body': json.dumps(response['Item']),
+                    'headers': {'Content-Type': 'application/json'}
+                }
+            else:
+                return {
+                    'statusCode': 404,
+                    'body': json.dumps({'error': 'Content not found'}),
+                    'headers': {'Content-Type': 'application/json'}
+                }
+        else:
+            # Fetch all items
+            response = table.scan()
             return {
                 'statusCode': 200,
-                'body': json.dumps(response['Item']),
-                'headers': {'Content-Type': 'application/json'}
-            }
-        else:
-            return {
-                'statusCode': 404,
-                'body': json.dumps({'error': 'Content not found'}),
+                'body': json.dumps(response['Items']),
                 'headers': {'Content-Type': 'application/json'}
             }
     
