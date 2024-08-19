@@ -1,0 +1,57 @@
+.page-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.ant-btn {
+  margin-top: 20px;
+}
+
+.ant-btn-primary {
+  background-color: #1890ff;
+  border-color: #1890ff;
+  border-radius: 5px;
+}
+
+.ant-btn-primary:hover {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+}
+
+.ant-btn-danger {
+  border-radius: 5px;
+}
+
+.ant-modal-content {
+  border-radius: 8px;
+}
+
+.ant-modal-header {
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+}
+
+.ant-modal-footer {
+  border-top: none;
+}
+
+.ant-modal-title {
+  font-size: 18px;
+  font-weight: 600;
+}

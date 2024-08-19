@@ -1,0 +1,55 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: 'Inter', sans-serif;
+  background-color: #f0f2f5;
+  color: #333;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.page-container {
+  padding: 80px 20px;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Ant Design overrides */
+.ant-card {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ant-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.ant-btn-primary {
+  background-color: #1890ff;
+  border-color: #1890ff;
+  border-radius: 5px;
+}
+
+.ant-btn-primary:hover {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+}
+
+.ant-input, .ant-input-textarea {
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.ant-form-item {
+  margin-bottom: 24px;
+}
