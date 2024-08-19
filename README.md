@@ -6,6 +6,7 @@ This project is a serverless clone of a Medium-like platform, built with two fro
 
 - [Project Scope](#project-scope)
 - [Project Structure](#project-structure)
+- [Architecture](#architecture)
 - [Prerequisites](#prerequisites)
 - [Cloning the Repository](#cloning-the-repository)
 - [Setup and Configuration](#setup-and-configuration)
@@ -41,6 +42,10 @@ medium-clone-aws-serverless/
 ├── lambda-functions/        # AWS Lambda functions for backend logic
 └── README.md                # Project documentation (this file)
 ```
+
+## Architecture
+
+![architecture](./images/architecture.png)
 
 ## Prerequisites
 
