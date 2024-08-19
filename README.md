@@ -16,6 +16,8 @@ This project is a serverless clone of a Medium-like platform, built with two fro
   - [Frontend Public](#frontend-public)
 - [Deploying and Testing the Lambda Functions](#deploying-and-testing-the-lambda-functions)
 - [API Documentation](#api-documentation)
+  - [Requests](#requests)
+  - [API Summary](#api---summary)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -163,16 +165,90 @@ The API exposes several endpoints for managing content:
 - PUT /content: Update existing content.
 - DELETE /content?id=<content-id>: Delete content by ID.
 
-### Example Request
+### Requests
+
+1. Create a new article
 
 ```code
-curl -X POST https://<your-api-id>.execute-api.<region>.amazonaws.com/dev/content \
--H "Content-Type: application/json" \
--d '{
-  "title": "New Article",
-  "body": "This is the content of the article."
-}'
+  curl -X POST https://<your-api-id>.execute-api.<region>.amazonaws.com/dev/articles \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "New Article",
+    "description": "This is a brief description of the article.",
+    "content": "This is the full content of the article.",
+    "author": "Author Name",
+    "date": "Dec 15, 2023"
+  }'
 ```
+
+2. Fetch all articles
+
+```code
+  curl -X GET https://<your-api-id>.execute-api.<region>.amazonaws.com/dev/articles
+```
+
+3. Fetch a specific article by id
+
+```code
+  curl -X GET https://<your-api-id>.execute-api.<region>.amazonaws.com/dev/articles/<article-id>
+```
+
+4. Update an article
+
+```code
+  curl -X PUT https://<your-api-id>.execute-api.<region>.amazonaws.com/dev/articles \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": "<article-id>",
+    "title": "Updated Article Title",
+    "description": "Updated description",
+    "content": "Updated full content",
+    "author": "Updated Author Name",
+    "date": "Dec 16, 2023"
+  }'
+```
+
+5. Delete an article
+
+```code
+  curl -X DELETE https://<your-api-id>.execute-api.<region>.amazonaws.com/dev/articles/<article-id>
+```
+
+6. Fetch About content
+
+```code
+  curl -X GET https://<your-api-id>.execute-api.<region>.amazonaws.com/dev/about
+```
+
+7. Update About content
+
+```code
+  curl -X POST https://<your-api-id>.execute-api/<region>.amazonaws.com/dev/about \
+  -H "Content-Type: application/json" \
+  -d '{
+    "content": "Updated about content."
+  }'
+```
+
+8. Fetch Contact content
+
+```code
+  curl -X GET https://<your-api-id>.execute-api.<region>.amazonaws.com/dev/contact
+```
+
+9. Update Contact content
+
+```code
+  curl -X POST https://<your-api-id>.execute-api.<region>.amazonaws.com/dev/contact \
+  -H "Content-Type: application/json" \
+  -d '{
+    "content": "Updated contact content."
+  }'
+```
+
+### API - Summary
+
+The API is structured around specific resource paths (/articles, /about, /contact), and the requests should be directed to these endpoints with appropriate HTTP methods (GET, POST, PUT, DELETE). The previous generic content endpoint is no longer relevant.
 
 ## Contributing
 
