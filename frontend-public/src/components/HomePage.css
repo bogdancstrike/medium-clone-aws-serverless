@@ -1,0 +1,53 @@
+/* HomePage.css */
+
+/* General Styles */
+.homepage-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.article-item {
+  width: 100%; /* Make each article take the full width of the container */
+  max-width: 1000px; /* Set a max-width to avoid articles becoming too wide */
+  margin: 10px auto; /* Center each article and add some spacing between them */
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  text-align: center; /* Center the text within each article */
+}
+
+.article-item:hover {
+  background-color: #f1f1f1;
+}
+
+.article-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.article-description {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.article-meta {
+  font-size: 14px;
+  color: #999;
+  display: block;
+  margin-top: 10px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  text-align: center; /* Center the section title */
+}

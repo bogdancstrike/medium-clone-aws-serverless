@@ -1,0 +1,76 @@
+/* General Styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background: #ffffff;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container for the about and contact pages */
+.article-page-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  min-height: calc(100vh - 80px); /* Ensure the container takes up full height minus the navbar */
+}
+
+/* Page Title */
+h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  text-align: center; /* Center text horizontally */
+}
+
+/* Page Content */
+p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center; /* Center text horizontally */
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .article-page-container {
+      max-width: 80%;
+      padding: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .article-page-container {
+      max-width: 95%;
+      padding: 10px;
+  }
+
+  h1 {
+      font-size: 26px;
+  }
+
+  p {
+      font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .article-page-container {
+      max-width: 100%;
+      padding: 10px;
+  }
+
+  h1 {
+      font-size: 22px;
+  }
+
+  p {
+      font-size: 12px;
+  }
+}
