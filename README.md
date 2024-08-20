@@ -69,23 +69,44 @@ cd medium-clone-aws-serverless
 
 ### AWS Setup
 
-1. Create a DynamoDB Table:
+1. **Create a DynamoDB Table**:
 
-- Log in to your AWS Management Console.
-- Navigate to DynamoDB and create a table named CMSContent.
-- Set id as the primary key.
+    - Log in to your AWS Management Console.
+    - Navigate to DynamoDB and create a table named `CMSContent`.
+    - Set `id` as the primary key.
 
+2. **Create IAM Roles**:
 
-2. Deploy Lambda Functions:
+    - Navigate to the IAM service in the AWS Management Console.
+    - Create a new IAM role for Lambda with the following permissions:
+      - `AWSLambdaBasicExecutionRole`: Allows the Lambda function to write logs to CloudWatch.
+      - `AmazonDynamoDBFullAccess`: Grants the Lambda function full access to DynamoDB tables.
 
-- Go to the lambda-functions/ directory.
-- Deploy each function using the AWS CLI or AWS Console.
-- Set the necessary environment variables, such as the DynamoDB table name.
-  
-3. Configure API Gateway:
+3. **Deploy Lambda Functions**:
 
-- Create a new API Gateway and set up the endpoints to invoke the Lambda functions.
-- Deploy the API and note down the endpoint URLs.
+    - Go to the `lambda-functions/` directory.
+    - Deploy each function using the AWS CLI or AWS Console.
+    - Ensure the IAM role you created is attached to each Lambda function.
+    - Set the necessary environment variables, such as the DynamoDB table name.
+
+4. **Configure API Gateway**:
+
+    - Create a new API Gateway and set up the endpoints to invoke the Lambda functions.
+    - Ensure that each endpoint is properly linked to the corresponding Lambda function.
+    - Deploy the API and note down the endpoint URLs.
+
+5. **Set Up S3 for Static Hosting**:
+
+    - Navigate to the S3 service in the AWS Management Console.
+    - Create two S3 buckets, one for each frontend application (`frontend-administrator` and `frontend-public`).
+    - Enable static website hosting in the properties of each bucket.
+    - Upload the build files from your React applications to the respective S3 buckets.
+    - Set the permissions to make the content publicly accessible.
+
+6. **Configure IAM Roles for S3**:
+
+    - Ensure that the IAM roles associated with the frontend applications have the necessary permissions to read from the S3 buckets.
+
 
 ## Frontend Setup
 
