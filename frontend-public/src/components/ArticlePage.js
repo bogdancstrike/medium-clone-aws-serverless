@@ -28,10 +28,7 @@ function ArticlePage() {
   return (
     <div className="article-page-container">
       <h1 className="article-title">{article.title}</h1>
-      <div className="article-metadata">
-        <span className="author-name">{article.author}</span>
-        <span className="article-date"> · {article.date}</span>
-      </div>
+      <div className="article-description">{article.description}</div>
       <div
         className="article-content"
         dangerouslySetInnerHTML={{ __html: article.content }}

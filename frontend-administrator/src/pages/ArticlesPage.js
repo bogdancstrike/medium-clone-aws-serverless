@@ -1,30 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Modal, Form, Input, Space } from 'antd';
+import { Table, Button, Modal, Form, Input, Space, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { fetchArticles, saveArticle, deleteArticle } from '../network';
 import ArticleForm from '../components/ArticleForm';
+import { fetchArticles, saveArticle, deleteArticle } from '../network';
 
 function ArticlesPage() {
   const [articles, setArticles] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentArticle, setCurrentArticle] = useState(null);
 
+  // Fetch articles from the backend
+  const loadArticles = async () => {
+    const articlesData = await fetchArticles();
+    setArticles(articlesData);
+  };
+
   useEffect(() => {
-    const loadArticles = async () => {
-      try {
-        const data = await fetchArticles();
-        setArticles(data);
-      } catch (error) {
-        // Handle error if necessary
-      }
-    };
     loadArticles();
   }, []);
 
-  const handleCreate = async (values) => {
-    const newArticle = await saveArticle(values);
-    setArticles([...articles, newArticle]);
-    setIsModalVisible(false);
+  const handleCreateOrUpdate = async (article) => {
+    try {
+      if (currentArticle) {
+        article.id = currentArticle.id; // Ensure the ID is set for updates
+      }
+      await saveArticle(article);
+      setIsModalVisible(false);
+      setCurrentArticle(null); // Clear the current article after submission
+      loadArticles(); // Reload articles after saving to ensure the new one is fetched
+      message.success(`Article ${article.id ? 'updated' : 'created'} successfully`);
+    } catch (error) {
+      message.error("Error saving article");
+    }
   };
 
   const handleEdit = (article) => {
@@ -33,13 +40,28 @@ function ArticlesPage() {
   };
 
   const handleDelete = async (id) => {
-    await deleteArticle(id);
-    setArticles(articles.filter(article => article.id !== id));
+    try {
+      await deleteArticle(id);
+      loadArticles();
+      message.success('Article deleted successfully');
+    } catch (error) {
+      message.error("Error deleting article");
+    }
   };
 
   const columns = [
     { title: 'Title', dataIndex: 'title', key: 'title' },
     { title: 'Description', dataIndex: 'description', key: 'description' },
+    { 
+      title: 'Content', 
+      dataIndex: 'content', 
+      key: 'content', 
+      render: (text) => (
+        <div>
+          {text.length > 100 ? `${text.substring(0, 100)}...` : text}
+        </div>
+      )
+    },
     {
       title: 'Actions',
       key: 'actions',
@@ -58,7 +80,7 @@ function ArticlesPage() {
         columns={columns}
         dataSource={articles}
         rowKey="id"
-        pagination={false} // Optional: Disable pagination if not needed
+        pagination={false}
         bordered
       />
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
@@ -66,7 +88,10 @@ function ArticlesPage() {
           type="primary"
           icon={<PlusOutlined />}
           size="large"
-          onClick={() => setIsModalVisible(true)}
+          onClick={() => {
+            setCurrentArticle(null);
+            setIsModalVisible(true);
+          }}
         >
           Add Article
         </Button>
@@ -79,8 +104,7 @@ function ArticlesPage() {
       >
         <ArticleForm
           article={currentArticle}
-          onSubmit={handleCreate}
-          onUpdate={handleEdit}
+          onSubmit={handleCreateOrUpdate}
         />
       </Modal>
     </div>

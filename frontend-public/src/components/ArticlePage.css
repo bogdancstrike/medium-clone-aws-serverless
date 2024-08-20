@@ -1,70 +1,100 @@
 /* General Styles */
 body {
-    font-family: 'Inter', sans-serif;
-    background: #ffffff;
-    color: #333;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Container for the article page */
+  font-family: 'Inter', sans-serif;
+  background: #ffffff;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container for the article page */
+.article-page-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+/* Article Title */
+.article-title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+/* Article Metadata */
+.article-metadata {
+  font-size: 16px;
+  color: #95a5a6;
+  margin-bottom: 20px;
+}
+
+/* Article Description */
+.article-description {
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: #7f8c8d;
+}
+
+/* Article Content */
+.article-content {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
   .article-page-container {
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #ffffff;
+    max-width: 80%;
+    padding: 15px;
   }
-  
-  /* Article Title */
+}
+
+@media (max-width: 768px) {
+  .article-page-container {
+    max-width: 95%;
+    padding: 10px;
+  }
+
   .article-title {
-    font-size: 30px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: #2c3e50;
+    font-size: 26px;
   }
-  
-  /* Article Metadata */
+
   .article-metadata {
+    font-size: 14px;
+  }
+
+  .article-description {
     font-size: 16px;
-    color: #95a5a6;
-    margin-bottom: 20px;
   }
-  
-  /* Responsive Styles */
-  @media (max-width: 1200px) {
-    .article-page-container {
-      max-width: 80%;
-      padding: 15px;
-    }
+
+  .article-content {
+    font-size: 14px;
   }
-  
-  @media (max-width: 768px) {
-    .article-page-container {
-      max-width: 95%;
-      padding: 10px;
-    }
-  
-    .article-title {
-      font-size: 26px;
-    }
-  
-    .article-metadata {
-      font-size: 14px;
-    }
+}
+
+@media (max-width: 480px) {
+  .article-page-container {
+    max-width: 100%;
+    padding: 10px;
   }
-  
-  @media (max-width: 480px) {
-    .article-page-container {
-      max-width: 100%;
-      padding: 10px;
-    }
-  
-    .article-title {
-      font-size: 22px;
-    }
-  
-    .article-metadata {
-      font-size: 12px;
-    }
+
+  .article-title {
+    font-size: 22px;
   }
-  
+
+  .article-metadata {
+    font-size: 12px;
+  }
+
+  .article-description {
+    font-size: 14px;
+  }
+
+  .article-content {
+    font-size: 12px;
+  }
+}
